@@ -1,0 +1,251 @@
+
+.association-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.97);
+  border-bottom: 1px solid #e2e8ef;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.association-navbar-inner {
+  width: 100%;
+  max-width: 1500px;
+  min-height: 82px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.association-brand {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #25282d;
+  text-decoration: none;
+}
+
+.association-brand-mark {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 50%;
+  background: #e30613;
+  color: #fff;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1;
+  box-shadow: 0 7px 18px rgb(227 6 19 / 16%);
+}
+
+.association-brand-mark img {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.association-brand-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.association-brand-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  line-height: 1;
+}
+
+.association-brand-copy strong {
+  font-size: 15px;
+  font-weight: 750;
+  letter-spacing: -0.3px;
+}
+
+.association-brand-copy small {
+  color: #6d6e71;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.7px;
+}
+
+.association-desktop-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(15px, 2vw, 30px);
+}
+
+.association-desktop-links a {
+  position: relative;
+  padding: 10px 0;
+  color: #5b616b;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+.association-desktop-links a:hover {
+  color: #e30613;
+}
+
+.association-desktop-links a:focus-visible,
+.association-desktop-actions a:focus-visible {
+  outline: 2px solid #0038a8;
+  outline-offset: 4px;
+}
+
+.association-desktop-actions {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.association-signin,
+.association-signup {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+  border-radius: 9px;
+  font-size: 11px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.association-signin {
+  color: #0038a8;
+  border: 1px solid transparent;
+}
+
+.association-signin:hover {
+  color: #002b80;
+  background: #eef7fd;
+}
+
+.association-signup {
+  color: #fff;
+  background: #0038a8;
+  border: 1px solid #0038a8;
+}
+
+.association-signup:hover {
+  background: #002b80;
+  border-color: #002b80;
+}
+
+@media (max-width: 1100px) {
+  .association-navbar-inner {
+    gap: 18px;
+    padding-right: 22px;
+    padding-left: 22px;
+  }
+
+  .association-brand-copy strong {
+    font-size: 13px;
+  }
+
+  .association-desktop-links {
+    gap: 15px;
+  }
+
+  .association-desktop-links a {
+    font-size: 11px;
+  }
+
+  .association-desktop-actions {
+    gap: 6px;
+  }
+
+  .association-signin,
+  .association-signup {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+}
+
+@media (max-width: 800px) {
+  .association-navbar {
+    position: relative;
+    top: auto;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .association-navbar-inner {
+    min-height: 68px;
+    padding: 10px 16px;
+    justify-content: flex-start;
+  }
+
+  .association-brand-mark {
+    width: 39px;
+    height: 39px;
+    flex-basis: 39px;
+    border-radius: 50%;
+    font-size: 27px;
+  }
+
+  .association-brand-copy strong {
+    font-size: 13px;
+  }
+
+  .association-brand-copy small {
+    font-size: 8px;
+    letter-spacing: 1.5px;
+  }
+
+  .association-desktop-links,
+  .association-desktop-actions {
+    display: none;
+  }
+}
+
+@media (max-width: 380px) {
+  .association-navbar-inner {
+    min-height: 62px;
+    padding: 9px 12px;
+  }
+
+  .association-brand {
+    gap: 9px;
+  }
+
+  .association-brand-mark {
+    width: 36px;
+    height: 36px;
+    flex-basis: 36px;
+  }
+
+  .association-brand-copy strong {
+    font-size: 12px;
+  }
+}

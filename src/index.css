@@ -1,0 +1,130 @@
+
+:root {
+  font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+  color: #25282d;
+  background: #ffffff;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-size: 16px;
+
+  --color-red: #e30613;
+  --color-red-dark: #b80510;
+  --color-blue: #0038a8;
+  --color-blue-dark: #002b80;
+  --color-sky: #96c8ed;
+  --color-sky-light: #eef7fd;
+  --color-orange: #f39200;
+  --color-yellow: #fff200;
+  --color-gray: #6d6e71;
+  --color-gray-light: #e7e9ed;
+  --color-white: #ffffff;
+  --color-text: #25282d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  min-height: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 20px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background: var(--color-white);
+  color: var(--color-text);
+}
+
+body,
+button,
+input,
+textarea,
+select {
+  font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  color: inherit;
+}
+
+a {
+  text-decoration: none;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 4px;
+}
+
+::selection {
+  background: var(--color-blue);
+  color: var(--color-white);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+@media (max-width: 700px) {
+  html {
+    scroll-padding-top: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+.placeholder-page {
+  min-height: 55vh;
+  padding: 48px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.placeholder-page h1 {
+  margin: 0 0 12px;
+  color: var(--color-red);
+  font-family: Georgia, serif;
+  font-size: clamp(28px, 5vw, 42px);
+}
+
+.placeholder-page p {
+  color: var(--color-gray);
+  line-height: 1.7;
+}
