@@ -5,40 +5,40 @@ import {
   FaHome,
   FaCalendarAlt,
   FaUsers,
-  FaNewspaper,
   FaPhone,
   FaUser,
   FaTools,
+  FaMapMarkedAlt,
 } from 'react-icons/fa'
 import './MobileBottomNav.css'
 
-function readUserRole() {
+function readUserRole(fallbackRole = 'guest') {
   try {
     const rawUser = localStorage.getItem('association_user')
 
-    if (!rawUser) return 'guest'
+    if (!rawUser) return fallbackRole
 
     const user = JSON.parse(rawUser)
 
     if (user?.role === 'admin') return 'admin'
     if (user) return 'user'
 
-    return 'guest'
+    return fallbackRole
   } catch {
-    return 'guest'
+    return fallbackRole
   }
 }
 
 export default function MobileBottomNav({ role = 'guest' }) {
   const location = useLocation()
-  const [currentRole, setCurrentRole] = useState(readUserRole)
+  const [currentRole, setCurrentRole] = useState(() => readUserRole(role))
 
   useEffect(() => {
-    setCurrentRole(readUserRole())
+    setCurrentRole(readUserRole(role))
   }, [location.pathname, location.key, role])
 
   useEffect(() => {
-    const refreshRole = () => setCurrentRole(readUserRole())
+    const refreshRole = () => setCurrentRole(readUserRole(role))
 
     window.addEventListener('storage', refreshRole)
     window.addEventListener('association-auth-change', refreshRole)
@@ -47,7 +47,7 @@ export default function MobileBottomNav({ role = 'guest' }) {
       window.removeEventListener('storage', refreshRole)
       window.removeEventListener('association-auth-change', refreshRole)
     }
-  }, [])
+  }, [role])
 
   const accountLinks =
     currentRole === 'admin'
@@ -67,9 +67,9 @@ export default function MobileBottomNav({ role = 'guest' }) {
 
   const links = [
     { label: 'Home', to: '/', icon: FaHome, end: true },
+    { label: 'About', to: '/#about', icon: FaUsers },
     { label: 'Activities', to: '/activities', icon: FaCalendarAlt },
-    { label: 'Association', to: '/#about', icon: FaUsers },
-    { label: 'News', to: '/news', icon: FaNewspaper },
+    { label: 'Map', to: '/map', icon: FaMapMarkedAlt },
     ...accountLinks,
   ]
 
@@ -94,7 +94,7 @@ export default function MobileBottomNav({ role = 'guest' }) {
                   location.hash !== '#about'
               }
 
-              if (item.label === 'Association') {
+              if (item.label === 'About') {
                 active =
                   location.pathname === '/' &&
                   location.hash === '#about'

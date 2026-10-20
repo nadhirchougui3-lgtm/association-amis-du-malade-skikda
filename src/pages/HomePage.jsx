@@ -189,19 +189,17 @@ function HomePage() {
             <div className="hero-copy">
               <span className="eyebrow">
                 <span className="eyebrow-line" />
-                Humanitarian Association · Skikda
+                Friends of the Patient Association · Skikda
               </span>
 
-              <h1>
-                Every Patient
+              <h1 className="hero-slogan">
+                To spread <span>hope…</span>
                 <br />
-                Deserves <span>Care and Dignity.</span>
+                And relieve <span>pain…</span>
               </h1>
 
               <p className="hero-description">
-                A community that brings together humanitarian, social and
-                scientific initiatives to support patients and those who need
-                care, compassion and solidarity.
+                Today, it is them… and tomorrow… perhaps it will be me or you…
               </p>
 
               <div className="hero-actions">
@@ -215,7 +213,9 @@ function HomePage() {
               </div>
 
               <div className="hero-note">
-                <span className="hero-note-symbol">♡</span>
+                <span className="hero-note-symbol" aria-hidden="true">
+                  ♡
+                </span>
                 <span>Solidarity is a responsibility. Care is a right.</span>
               </div>
             </div>
@@ -223,14 +223,17 @@ function HomePage() {
             <div
               className="hero-art"
               role="img"
-              aria-label="Symbol representing care and solidarity"
+              aria-label="Official logo representing Friends of the Patient Association"
             >
               <div className="art-orbit orbit-outer" />
               <div className="art-orbit orbit-inner" />
 
-              <div className="art-center">
-                <span className="art-cross">+</span>
-                <span className="art-heart">♡</span>
+              <div className="art-center hero-logo-center">
+                <img
+                  className="hero-logo"
+                  src="/association-logo.png"
+                  alt="Friends of the Patient Association logo"
+                />
               </div>
 
               <div className="art-label art-label-top">
@@ -243,13 +246,17 @@ function HomePage() {
                 Solidarity
               </div>
 
-              <span className="art-star art-star-one">✳</span>
-              <span className="art-star art-star-two">✦</span>
+              <span className="art-star art-star-one" aria-hidden="true">
+                ✳
+              </span>
+              <span className="art-star art-star-two" aria-hidden="true">
+                ✦
+              </span>
             </div>
           </div>
 
           <div className="container hero-bottom">
-            <span>Friends of the Patient Association · Skikda</span>
+            <span>Friends of the Patient Association · Skikda, Algeria</span>
             <a href="#about">
               Discover Our Mission <span aria-hidden="true">↓</span>
             </a>
@@ -482,9 +489,11 @@ function HomePage() {
       <footer className="site-footer">
         <div className="container footer-inner">
           <a className="brand footer-brand" href="#home">
-            <span className="brand-mark" aria-hidden="true">
-              <span>+</span>
-            </span>
+            <img
+              className="footer-logo"
+              src="/association-logo.png"
+              alt="Friends of the Patient Association logo"
+            />
 
             <span className="brand-copy">
               <strong>Friends of the Patient</strong>

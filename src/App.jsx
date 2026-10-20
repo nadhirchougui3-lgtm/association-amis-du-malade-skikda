@@ -1,3 +1,4 @@
+
 import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/navbar/Navbar'
 import Footer from './components/Footer'
@@ -8,6 +9,7 @@ import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
 import ContactPage from './pages/ContactPage'
 import AccountPage from './pages/AccountPage'
+import MapPage from './pages/MapPage'
 
 export default function App() {
   return (
@@ -30,6 +32,8 @@ export default function App() {
             path="/news"
             element={<PlaceholderPage title="Latest News" />}
           />
+
+          <Route path="/map" element={<MapPage />} />
 
           <Route
             path="/contact"

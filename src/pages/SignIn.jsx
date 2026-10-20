@@ -83,6 +83,9 @@ export default function SignIn() {
       localStorage.setItem('association_token', data.token)
       localStorage.setItem('association_user', JSON.stringify(data.user))
 
+      // Update the mobile navbar immediately after successful sign-in.
+      window.dispatchEvent(new Event('association-auth-change'))
+
       navigate('/account', { replace: true })
     } catch (err) {
       setError(

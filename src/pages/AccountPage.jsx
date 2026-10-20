@@ -1,5 +1,6 @@
 
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './AccountPage.css'
 
 function getStoredUser() {
@@ -13,22 +14,35 @@ function getStoredUser() {
 
 function getInitials(user) {
   const name = user?.nom || user?.name || user?.fullName || ''
-  return name
-    .trim()
-    .split(/\s+/)
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((part) => part[0].toUpperCase())
-    .join('') || 'U'
+
+  return (
+    name
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((part) => part[0].toUpperCase())
+      .join('') || 'U'
+  )
 }
 
 function AccountPage() {
+  const navigate = useNavigate()
   const [user] = useState(getStoredUser)
 
   const name = user?.nom || user?.name || user?.fullName || 'Member'
   const email = user?.email || 'Not provided'
   const phone = user?.telephone || user?.phone || 'Not provided'
   const role = user?.role || 'Member'
+
+  function handleLogout() {
+    localStorage.removeItem('association_token')
+    localStorage.removeItem('association_user')
+
+    window.dispatchEvent(new Event('association-auth-change'))
+
+    navigate('/', { replace: true })
+  }
 
   return (
     <div className="account-page">
@@ -188,6 +202,16 @@ function AccountPage() {
             Contact Us
             <span aria-hidden="true">→</span>
           </a>
+        </section>
+
+        <section className="account-logout-section">
+          <button
+            type="button"
+            className="account-logout-button"
+            onClick={handleLogout}
+          >
+            Log Out
+          </button>
         </section>
       </main>
     </div>

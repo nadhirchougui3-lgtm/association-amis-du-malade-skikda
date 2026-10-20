@@ -10,6 +10,7 @@ import {
   FaPaperPlane,
   FaHeart,
   FaHandHoldingHeart,
+  FaArrowRight,
 } from 'react-icons/fa'
 import './ContactPage.css'
 
@@ -88,10 +89,15 @@ export default function ContactPage() {
                   <FaPhoneAlt aria-hidden="true" />
                 </div>
 
-                <div>
+                <div className="association-contact-method-details">
                   <strong>Phone</strong>
                   <span>Contact details coming soon</span>
                 </div>
+
+                <FaArrowRight
+                  className="association-contact-method-arrow"
+                  aria-hidden="true"
+                />
               </div>
 
               <div className="association-contact-method">
@@ -99,10 +105,15 @@ export default function ContactPage() {
                   <FaEnvelope aria-hidden="true" />
                 </div>
 
-                <div>
+                <div className="association-contact-method-details">
                   <strong>Email</strong>
                   <span>Email address coming soon</span>
                 </div>
+
+                <FaArrowRight
+                  className="association-contact-method-arrow"
+                  aria-hidden="true"
+                />
               </div>
 
               <div className="association-contact-method">
@@ -110,10 +121,15 @@ export default function ContactPage() {
                   <FaMapMarkerAlt aria-hidden="true" />
                 </div>
 
-                <div>
+                <div className="association-contact-method-details">
                   <strong>Location</strong>
                   <span>Skikda, Algeria</span>
                 </div>
+
+                <FaArrowRight
+                  className="association-contact-method-arrow"
+                  aria-hidden="true"
+                />
               </div>
             </div>
 
@@ -221,21 +237,13 @@ export default function ContactPage() {
                 <option value="" disabled>
                   Choose a subject
                 </option>
-                <option value="General inquiry">
-                  General inquiry
-                </option>
-                <option value="Patient support">
-                  Patient support
-                </option>
-                <option value="Volunteering">
-                  Volunteering
-                </option>
+                <option value="General inquiry">General inquiry</option>
+                <option value="Patient support">Patient support</option>
+                <option value="Volunteering">Volunteering</option>
                 <option value="Activities and training">
                   Activities and training
                 </option>
-                <option value="Partnership">
-                  Partnership
-                </option>
+                <option value="Partnership">Partnership</option>
                 <option value="Other">Other</option>
               </select>
             </div>

@@ -282,6 +282,40 @@
   outline-offset: 3px;
 }
 
+/* Log out */
+.account-logout-section {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 28px;
+  padding-bottom: 20px;
+}
+
+.account-logout-button {
+  min-height: 42px;
+  padding: 0 22px;
+  border: 1px solid #e30613;
+  border-radius: 9px;
+  background: #ffffff;
+  color: #e30613;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.account-logout-button:hover {
+  background: #e30613;
+  color: #ffffff;
+}
+
+.account-logout-button:focus-visible {
+  outline: 2px solid #0038a8;
+  outline-offset: 3px;
+}
+
 @media (max-width: 700px) {
   .account-header {
     padding: 38px 20px 48px;
@@ -340,6 +374,15 @@
 
   .account-contact-link {
     width: 100%;
+  }
+
+  .account-logout-section {
+    justify-content: stretch;
+  }
+
+  .account-logout-button {
+    width: 100%;
+    min-height: 46px;
   }
 }
 

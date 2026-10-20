@@ -1,5 +1,13 @@
 
 import './Footer.css'
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaTiktok,
+  FaMapMarkerAlt,
+  FaPhone,
+  FaEnvelope,
+} from 'react-icons/fa'
 
 const footerGroups = [
   {
@@ -27,58 +35,41 @@ const footerGroups = [
   },
 ]
 
-function SocialIcon({ name }) {
-  if (name === 'Facebook') {
-    return (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path
-          fill="currentColor"
-          d="M13.5 21v-8.2h2.8l.4-3.2h-3.2v-2c0-.9.3-1.6 1.6-1.6h1.7V3.1c-.8-.1-1.7-.2-2.5-.2-2.5 0-4.2 1.5-4.2 4.3v2.4H7.3v3.2h2.8V21h3.4Z"
-        />
-      </svg>
-    )
-  }
-
-  if (name === 'Instagram') {
-    return (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <rect
-          x="3.2"
-          y="3.2"
-          width="17.6"
-          height="17.6"
-          rx="5"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-        />
-        <circle
-          cx="12"
-          cy="12"
-          r="4"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-        />
-        <circle cx="17.7" cy="6.7" r="1.2" fill="currentColor" />
-      </svg>
-    )
-  }
-
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path
-        fill="currentColor"
-        d="M19.5 8.1a6.2 6.2 0 0 1-4-1.5v7.1a6.2 6.2 0 1 1-5.4-6.1v3.4a2.8 2.8 0 1 0 2 2.7V2.5h3.4c.2 2 1.8 3.6 4 3.8v1.8Z"
-      />
-    </svg>
-  )
-}
-
 const socialLinks = [
-  { name: 'Facebook', href: '' },
-  { name: 'Instagram', href: '' },
-  { name: 'TikTok', href: '' },
+  {
+    name: 'Facebook',
+    href: 'https://www.facebook.com/share/1A2fqDXAMy/',
+    Icon: FaFacebookF,
+  },
+  {
+    name: 'Instagram',
+    href: '',
+    Icon: FaInstagram,
+  },
+  {
+    name: 'TikTok',
+    href: '',
+    Icon: FaTiktok,
+  },
+]
+
+const contactDetails = [
+  {
+    label: '0780 42 21 94',
+    href: 'tel:0780422194',
+    Icon: FaPhone,
+  },
+  {
+    label: 'lam_skikda@yahoo.fr',
+    href: 'mailto:lam_skikda@yahoo.fr',
+    Icon: FaEnvelope,
+  },
+  {
+    label: 'View on Google Maps',
+    href: 'https://maps.app.goo.gl/7QZ6v6i2vqHZc1EX7',
+    Icon: FaMapMarkerAlt,
+    external: true,
+  },
 ]
 
 export default function Footer() {
@@ -103,6 +94,7 @@ export default function Footer() {
               <span className="association-footer-name">
                 Friends of the <span>Patient</span>
               </span>
+
               <span className="association-footer-tagline">
                 SKIKDA · ALGERIA
               </span>
@@ -114,28 +106,31 @@ export default function Footer() {
             community activities, awareness, and humanitarian action.
           </p>
 
-          <a className="association-footer-contact-link" href="/contact">
+          <a
+            className="association-footer-contact-link"
+            href="/contact"
+          >
             Contact the Association
-            <span aria-hidden="true"> ↗</span>
+            <span aria-hidden="true">↗</span>
           </a>
 
           <div
             className="association-footer-socials"
             aria-label="Social media"
           >
-            {socialLinks.map((social) => (
+            {socialLinks.map(({ name, href, Icon }) => (
               <a
-                key={social.name}
+                key={name}
                 className="association-footer-social"
-                href={social.href || undefined}
-                aria-label={social.name}
-                title={social.name}
-                aria-disabled={!social.href}
+                href={href || undefined}
+                aria-label={name}
+                title={name}
+                aria-disabled={!href}
                 onClick={(event) => {
-                  if (!social.href) event.preventDefault()
+                  if (!href) event.preventDefault()
                 }}
               >
-                <SocialIcon name={social.name} />
+                <Icon aria-hidden="true" />
               </a>
             ))}
           </div>
@@ -158,13 +153,43 @@ export default function Footer() {
         ))}
 
         <div className="association-footer-location">
-          <h3>Our Community</h3>
-          <div className="association-footer-location-mark" aria-hidden="true">
-            <span>+</span>
-          </div>
-          <p>Friends of the Patient Association</p>
-          <span>Skikda, Algeria</span>
-          <a href="/contact">Get in touch ↗</a>
+          <h3>Contact Information</h3>
+
+          {contactDetails.map(
+            ({ label, href, Icon, external = false }) => (
+              <a
+                key={label}
+                className="association-footer-contact-item"
+                href={href}
+                {...(external
+                  ? {
+                      target: '_blank',
+                      rel: 'noopener noreferrer',
+                    }
+                  : {})}
+              >
+                <span className="association-footer-contact-icon">
+                  <Icon aria-hidden="true" />
+                </span>
+
+                <span className="association-footer-contact-label">
+                  {label}
+                </span>
+              </a>
+            ),
+          )}
+
+          <p className="association-footer-address">
+            Skikda, Algeria
+          </p>
+
+          <a
+            className="association-footer-location-link"
+            href="/contact"
+          >
+            Get in touch
+            <span aria-hidden="true">↗</span>
+          </a>
         </div>
       </div>
 
@@ -175,7 +200,7 @@ export default function Footer() {
         </p>
 
         <span className="association-footer-country">
-          <span aria-hidden="true">●</span> SKIKDA, ALGERIA
+          SKIKDA, ALGERIA
         </span>
       </div>
     </footer>
