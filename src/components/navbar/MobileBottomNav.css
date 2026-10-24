@@ -89,9 +89,9 @@
   .association-mobile-nav-link.active::after {
     content: "";
     position: absolute;
-    right: 15px;
+    right: 12px;
     bottom: 2px;
-    left: 15px;
+    left: 12px;
     height: 2px;
     border-radius: 2px;
     background: #e30613;
@@ -127,6 +127,11 @@
     padding-left: 0;
     font-size: 9px;
   }
+
+  .association-mobile-nav-link.active::after {
+    right: 10px;
+    left: 10px;
+  }
 }
 
 /* Narrow mobile screens */
@@ -145,8 +150,8 @@
   }
 
   .association-mobile-nav-link.active::after {
-    right: 10px;
-    left: 10px;
+    right: 8px;
+    left: 8px;
   }
 }
 

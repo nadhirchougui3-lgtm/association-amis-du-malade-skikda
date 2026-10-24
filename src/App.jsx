@@ -1,12 +1,10 @@
-
 import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/navbar/Navbar'
 import Footer from './components/Footer'
 
 import HomePage from './pages/HomePage'
+import AboutPage from './pages/AboutPage'
 import PlaceholderPage from './pages/PlaceholderPage'
-import SignIn from './pages/SignIn'
-import SignUp from './pages/SignUp'
 import ContactPage from './pages/ContactPage'
 import AccountPage from './pages/AccountPage'
 import MapPage from './pages/MapPage'
@@ -20,8 +18,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
 
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route path="/about" element={<AboutPage />} />
 
           <Route
             path="/activities"
@@ -35,15 +32,9 @@ export default function App() {
 
           <Route path="/map" element={<MapPage />} />
 
-          <Route
-            path="/contact"
-            element={<ContactPage />}
-          />
+          <Route path="/contact" element={<ContactPage />} />
 
-          <Route
-            path="/account"
-            element={<AccountPage />}
-          />
+          <Route path="/account" element={<AccountPage />} />
 
           <Route
             path="/admin"

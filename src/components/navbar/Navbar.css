@@ -22,7 +22,7 @@
   box-sizing: border-box;
 }
 
-/* Association logo and name */
+/* Association brand */
 .association-brand {
   flex-shrink: 0;
   display: flex;
@@ -94,7 +94,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: clamp(14px, 1.6vw, 25px);
+  gap: clamp(12px, 1.5vw, 22px);
   margin-left: auto;
 }
 
@@ -116,74 +116,31 @@
 .association-desktop-link svg {
   flex-shrink: 0;
   font-size: 15px;
-  color: #6d6e71;
+  color: currentColor;
   transition: color 0.2s ease;
 }
 
 .association-desktop-link:hover,
-.association-desktop-link:hover svg {
+.association-desktop-link.active {
   color: #e30613;
 }
 
-/* Account actions */
-.association-desktop-actions {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.association-signin,
-.association-signup {
-  min-height: 38px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  padding: 0 12px;
-  border-radius: 9px;
-  font-size: 11px;
-  font-weight: 700;
-  text-decoration: none;
-  white-space: nowrap;
-  transition:
-    background 0.2s ease,
-    color 0.2s ease,
-    border-color 0.2s ease;
-}
-
-.association-signin svg,
-.association-signup svg {
-  flex-shrink: 0;
-  font-size: 13px;
-}
-
-.association-signin {
-  color: #6d6e71;
-  border: 1px solid transparent;
-}
-
-.association-signin:hover {
-  color: #e30613;
-  background: #fff1f2;
-}
-
-.association-signup {
-  color: #fff;
+.association-desktop-link.active::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  border-radius: 2px;
   background: #e30613;
-  border: 1px solid #e30613;
-}
-
-.association-signup:hover {
-  background: #bd0510;
-  border-color: #bd0510;
 }
 
 /* Keyboard accessibility */
-.association-desktop-link:focus-visible,
-.association-desktop-actions a:focus-visible {
+.association-desktop-link:focus-visible {
   outline: 2px solid #e30613;
   outline-offset: 4px;
+  border-radius: 4px;
 }
 
 /* Smaller desktop screens */
@@ -192,6 +149,10 @@
     gap: 16px;
     padding-right: 22px;
     padding-left: 22px;
+  }
+
+  .association-brand {
+    gap: 9px;
   }
 
   .association-brand-copy strong {
@@ -203,23 +164,12 @@
   }
 
   .association-desktop-link {
-    gap: 6px;
+    gap: 5px;
     font-size: 11px;
   }
 
   .association-desktop-link svg {
     font-size: 13px;
-  }
-
-  .association-desktop-actions {
-    gap: 5px;
-  }
-
-  .association-signin,
-  .association-signup {
-    gap: 5px;
-    padding-right: 9px;
-    padding-left: 9px;
   }
 }
 
@@ -255,8 +205,7 @@
     letter-spacing: 1.5px;
   }
 
-  .association-desktop-links,
-  .association-desktop-actions {
+  .association-desktop-links {
     display: none;
   }
 }

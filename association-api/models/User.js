@@ -13,16 +13,39 @@ const userSchema = new mongoose.Schema(
 
     telephone: {
       type: String,
-      required: true,
-      unique: true,
       trim: true,
       maxlength: 20,
     },
 
     password: {
       type: String,
-      required: true,
       select: false,
+    },
+
+    email: {
+      type: String,
+      trim: true,
+      lowercase: true,
+      maxlength: 254,
+    },
+
+    facebookId: {
+      type: String,
+      unique: true,
+      sparse: true,
+      select: false,
+    },
+
+    photoUrl: {
+      type: String,
+      maxlength: 2048,
+    },
+
+    authProvider: {
+      type: String,
+      enum: ['phone', 'facebook'],
+      default: 'phone',
+      required: true,
     },
 
     role: {
@@ -40,5 +63,35 @@ const userSchema = new mongoose.Schema(
     timestamps: true,
   },
 )
+
+userSchema.index(
+  { telephone: 1 },
+  {
+    unique: true,
+    partialFilterExpression: {
+      telephone: { $type: 'string' },
+    },
+  },
+)
+
+userSchema.pre('validate', function validateAuthMethod(next) {
+  if (this.authProvider === 'facebook') {
+    if (!this.facebookId) {
+      this.invalidate('facebookId', 'Facebook ID is required.')
+    }
+
+    return next()
+  }
+
+  if (!this.telephone) {
+    this.invalidate('telephone', 'Phone number is required.')
+  }
+
+  if (!this.password && this.isNew) {
+    this.invalidate('password', 'Password is required.')
+  }
+
+  next()
+})
 
 module.exports = mongoose.model('User', userSchema)

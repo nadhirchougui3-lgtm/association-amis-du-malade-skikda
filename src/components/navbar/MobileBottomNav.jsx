@@ -1,5 +1,3 @@
-
-import { useEffect, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import {
   FaHome,
@@ -7,70 +5,22 @@ import {
   FaUsers,
   FaPhone,
   FaUser,
-  FaTools,
   FaMapMarkedAlt,
 } from 'react-icons/fa'
+import { useLanguage } from '../../context/LanguageContext'
 import './MobileBottomNav.css'
 
-function readUserRole(fallbackRole = 'guest') {
-  try {
-    const rawUser = localStorage.getItem('association_user')
-
-    if (!rawUser) return fallbackRole
-
-    const user = JSON.parse(rawUser)
-
-    if (user?.role === 'admin') return 'admin'
-    if (user) return 'user'
-
-    return fallbackRole
-  } catch {
-    return fallbackRole
-  }
-}
-
-export default function MobileBottomNav({ role = 'guest' }) {
+export default function MobileBottomNav() {
   const location = useLocation()
-  const [currentRole, setCurrentRole] = useState(() => readUserRole(role))
-
-  useEffect(() => {
-    setCurrentRole(readUserRole(role))
-  }, [location.pathname, location.key, role])
-
-  useEffect(() => {
-    const refreshRole = () => setCurrentRole(readUserRole(role))
-
-    window.addEventListener('storage', refreshRole)
-    window.addEventListener('association-auth-change', refreshRole)
-
-    return () => {
-      window.removeEventListener('storage', refreshRole)
-      window.removeEventListener('association-auth-change', refreshRole)
-    }
-  }, [role])
-
-  const accountLinks =
-    currentRole === 'admin'
-      ? [
-          { label: 'Admin', to: '/admin', icon: FaTools },
-          { label: 'Account', to: '/account', icon: FaUser },
-        ]
-      : currentRole === 'user'
-        ? [
-            { label: 'Contact', to: '/contact', icon: FaPhone },
-            { label: 'Account', to: '/account', icon: FaUser },
-          ]
-        : [
-            { label: 'Sign In', to: '/signin', icon: FaUser },
-            { label: 'Sign Up', to: '/signup', icon: FaUser },
-          ]
+  const { t } = useLanguage()
 
   const links = [
-    { label: 'Home', to: '/', icon: FaHome, end: true },
-    { label: 'About', to: '/#about', icon: FaUsers },
-    { label: 'Activities', to: '/activities', icon: FaCalendarAlt },
-    { label: 'Map', to: '/map', icon: FaMapMarkedAlt },
-    ...accountLinks,
+    { label: t('home'), to: '/', icon: FaHome, end: true },
+    { label: t('about'), to: '/about', icon: FaUsers },
+    { label: t('activities'), to: '/activities', icon: FaCalendarAlt },
+    { label: t('map'), to: '/map', icon: FaMapMarkedAlt },
+    { label: t('contact'), to: '/contact', icon: FaPhone },
+    { label: t('account'), to: '/account', icon: FaUser },
   ]
 
   return (
@@ -80,7 +30,7 @@ export default function MobileBottomNav({ role = 'guest' }) {
 
         return (
           <NavLink
-            key={item.label}
+            key={item.to}
             to={item.to}
             end={item.end}
             aria-label={item.label}
@@ -88,16 +38,17 @@ export default function MobileBottomNav({ role = 'guest' }) {
             className={({ isActive }) => {
               let active = isActive
 
-              if (item.label === 'Home') {
+              if (item.to === '/') {
                 active =
                   location.pathname === '/' &&
                   location.hash !== '#about'
               }
 
-              if (item.label === 'About') {
+              if (item.to === '/about') {
                 active =
-                  location.pathname === '/' &&
-                  location.hash === '#about'
+                  location.pathname === '/about' ||
+                  (location.pathname === '/' &&
+                    location.hash === '#about')
               }
 
               return `association-mobile-nav-link${active ? ' active' : ''}`

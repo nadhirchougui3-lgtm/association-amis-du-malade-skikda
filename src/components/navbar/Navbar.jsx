@@ -1,5 +1,5 @@
 
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import {
   FaHome,
   FaUsers,
@@ -7,41 +7,36 @@ import {
   FaMapMarkedAlt,
   FaPhone,
   FaUser,
-  FaTools,
-  FaSignInAlt,
-  FaUserPlus,
 } from 'react-icons/fa'
+import { useLanguage } from '../../context/LanguageContext'
 import MobileBottomNav from './MobileBottomNav'
 import './Navbar.css'
 
-export default function Navbar({ user = null, role = 'guest' }) {
-  const currentRole =
-    role === 'admin' || user?.role === 'admin'
-      ? 'admin'
-      : user || role === 'user'
-        ? 'user'
-        : 'guest'
+export default function Navbar() {
+  const { t } = useLanguage()
 
   const links = [
-    { label: 'Home', to: '/', icon: FaHome },
-    { label: 'About', to: '/#about', icon: FaUsers },
-    { label: 'Activities', to: '/activities', icon: FaCalendarAlt },
-    { label: 'Map', to: '/map', icon: FaMapMarkedAlt },
+    { label: t('home'), to: '/', icon: FaHome, end: true },
+    { label: t('about'), to: '/about', icon: FaUsers },
+    { label: t('activities'), to: '/activities', icon: FaCalendarAlt },
+    { label: t('map'), to: '/map', icon: FaMapMarkedAlt },
+    { label: t('contact'), to: '/contact', icon: FaPhone },
+    { label: t('account'), to: '/account', icon: FaUser },
   ]
 
   return (
     <>
-      <header className="association-navbar">
+      <header className="association-navbar" dir="ltr">
         <div className="association-navbar-inner">
-          <Link
+          <NavLink
             to="/"
             className="association-brand"
-            aria-label="Friends of the Patient Association home"
+            aria-label={t('associationName')}
           >
             <span className="association-brand-mark">
               <img
                 src="/association-logo.png"
-                alt="Association logo"
+                alt={t('associationName')}
                 onError={(event) => {
                   event.currentTarget.style.display = 'none'
                 }}
@@ -52,78 +47,38 @@ export default function Navbar({ user = null, role = 'guest' }) {
             </span>
 
             <span className="association-brand-copy">
-              <strong>Friends of the Patient</strong>
-              <small>SKIKDA · ALGERIA</small>
+              <strong>{t('associationName')}</strong>
+              <small>{t('associationLocation')}</small>
             </span>
-          </Link>
+          </NavLink>
 
           <nav
             className="association-desktop-links"
             aria-label="Main navigation"
+            dir="ltr"
           >
             {links.map((item) => {
               const Icon = item.icon
 
               return (
-                <Link
-                  key={item.label}
+                <NavLink
+                  key={item.to}
                   to={item.to}
-                  className="association-desktop-link"
+                  end={item.end}
+                  className={({ isActive }) =>
+                    `association-desktop-link${isActive ? ' active' : ''}`
+                  }
                 >
                   <Icon aria-hidden="true" />
                   <span>{item.label}</span>
-                </Link>
+                </NavLink>
               )
             })}
           </nav>
-
-          <div className="association-desktop-actions">
-            {currentRole === 'guest' && (
-              <>
-                <Link className="association-signin" to="/signin">
-                  <FaSignInAlt aria-hidden="true" />
-                  <span>Sign In</span>
-                </Link>
-
-                <Link className="association-signup" to="/signup">
-                  <FaUserPlus aria-hidden="true" />
-                  <span>Sign Up</span>
-                </Link>
-              </>
-            )}
-
-            {currentRole === 'user' && (
-              <>
-                <Link className="association-signin" to="/contact">
-                  <FaPhone aria-hidden="true" />
-                  <span>Contact</span>
-                </Link>
-
-                <Link className="association-signup" to="/account">
-                  <FaUser aria-hidden="true" />
-                  <span>Account</span>
-                </Link>
-              </>
-            )}
-
-            {currentRole === 'admin' && (
-              <>
-                <Link className="association-signin" to="/admin">
-                  <FaTools aria-hidden="true" />
-                  <span>Admin</span>
-                </Link>
-
-                <Link className="association-signup" to="/account">
-                  <FaUser aria-hidden="true" />
-                  <span>Account</span>
-                </Link>
-              </>
-            )}
-          </div>
         </div>
       </header>
 
-      <MobileBottomNav role={currentRole} />
+      <MobileBottomNav />
     </>
   )
 }
